@@ -55,7 +55,7 @@ def jaro_winkler_similarity(s1, s2, prefix_scale=0.1):
 
 
 # Example usage
-string1 = "MARTHA"
-string2 = "MARHTA"
+string1 = "antique"
+string2 = "ancient"
 similarity = jaro_winkler_similarity(string1, string2)
 print("Jaro-Winkler Similarity:", similarity)
