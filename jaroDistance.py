@@ -51,5 +51,5 @@ def jaro_distance(s1, s2):
 
 
 # Contoh penggunaan
-distance = jaro_distance("MSRTHA", "MARHTA")
+distance = jaro_distance("MARTHA", "MARHTA")
 print("Jaro Distance:", distance)
