@@ -11,7 +11,7 @@ def jakar(set_a, set_b):
     return intersection / union if union != 0 else 0.0
 
 
-benar = ["tolong", "matikan", "lampu", "cook"]
+benar = ["tolong", "matikan", "lampu", "cook", "antique"]
 kalimat = input("Masukkan kalimat : ")
 berkata = kalimat.split()
 # similarity_threshold = 0.5
