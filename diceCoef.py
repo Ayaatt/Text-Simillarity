@@ -18,8 +18,8 @@ def dice_coefficient(a, b):
 
 
 # Example usage
-string1 = "night"
-string2 = "nigkt"
+string1 = "sakitsi"
+string2 = "suakitnya"
 
 coefficient = dice_coefficient(string1, string2)
 print("Dice's Coefficient:", coefficient)
