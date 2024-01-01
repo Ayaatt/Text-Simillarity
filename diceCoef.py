@@ -6,20 +6,20 @@ def dice_coefficient(a, b):
     # Convert strings to sets of characters
     a_bigrams = set(a)
     b_bigrams = set(b)
-    print(f"a_diagram : {a_bigrams}")
-    print(f"b_diagram : {b_bigrams}")
+    # print(f"a_diagram : {a_bigrams}")
+    # print(f"b_diagram : {b_bigrams}")
 
     # Find the intersection of the two sets
     overlap = len(a_bigrams & b_bigrams)
-    print(f"overlap : {overlap}")
+    # print(f"overlap : {overlap}")
 
     # Calculate Dice's Coefficient
     return 2.0 * overlap / (len(a_bigrams) + len(b_bigrams))
 
 
 # Example usage
-string1 = "sakitsi"
-string2 = "suakitnya"
+# string1 = "sakitsi"
+# string2 = "suakitnya"
 
-coefficient = dice_coefficient(string1, string2)
-print("Dice's Coefficient:", coefficient)
+# coefficient = dice_coefficient(string1, string2)
+# print("Dice's Coefficient:", coefficient)

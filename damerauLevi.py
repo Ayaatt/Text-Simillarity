@@ -25,5 +25,5 @@ def damerau_levenshtein_distance(s1, s2):
 
 
 # Contoh penggunaan
-distance = damerau_levenshtein_distance("saturday", "sunday")
-print("Damerau-Levenshtein Distance:", distance)
+# distance = damerau_levenshtein_distance("saturday", "sunday")
+# print("Damerau-Levenshtein Distance:", distance)
