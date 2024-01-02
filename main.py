@@ -4,7 +4,7 @@ import jaccard
 # import diceCoef
 # import euclidienDistance
 import jaroDistance
-# import jaroWinkler
+import jaroWinkler
 # import levenshteinD
 # import manhattan
 # import nGram
@@ -46,9 +46,18 @@ def koreksi(algorithm):
         if token in [".", ",", "!", "?", ":", ";", "the"]:
             corrected_tokens.append(token)
             continue
-        best_match = max(
-            dictionary, key=lambda dict_word: calculate_similarity(
-                algorithm, token, dict_word))
+        for benar_kata in dictionary:
+            # benar_set = set(benar_kata)
+            # if tokens != benar_kata:
+            # similarity_jaro = jaroDistance.jaro(str(tokens), str(benar_set))
+            similarity = calculate_similarity(algorithm, token, benar_kata)
+
+            print("Hasil kesamaan Jaro antara kalimat input '" + token +
+                  "' dan kalimat benar '" + benar_kata + "' adalah " + str(similarity))
+            print(f" kata_set : {token}")
+            print(f" benar_kata : {benar_kata}")
+        best_match = max(dictionary, key=lambda benar_kata: calculate_similarity(
+            algorithm, token, benar_kata))
         corrected_tokens.append(best_match)
 
     kalimatnya = ' '.join(corrected_tokens)
@@ -56,10 +65,16 @@ def koreksi(algorithm):
     return kalimatnya
 
 
-jackar = koreksi(jaccard.jakar)
-jarno = koreksi(jaroDistance.jaro)
-print(f"jaccard : {jackar}")
-print(f"Jaro : {jarno}")
+start_time = time.time()
+# jackar = koreksi(jaccard.jakar)
+# jarno = koreksi(jaroDistance.jaro)
+# print(f"jaccard : {jackar}")
+# print(f"Jaro : {jarno}")
+jarWe = koreksi(jaroWinkler.jaro_winkler_similarity)
+print(f"JaroWin : {jarWe}")
+elapsed_time = time.time() - start_time
+print(f"WAKTU YANG DIBUTUHKAN : {elapsed_time}")
+
 # for benar_kata in dictionary:
 #     # benar_set = set(benar_kata)
 #     # if tokens != benar_kata:
