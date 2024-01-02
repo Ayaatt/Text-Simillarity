@@ -34,25 +34,32 @@ def nilai_tertinggi(datalist):
     return max_value[0]  # Mengembalikan string di samping nilai tertinggi
 
 
-dictionary = ["on", "off", "fan", "tv", "television", "PC", "lamp", "turn"]
-user_query = input("Masukkan kalimat : ")
-print("isinya user query", user_query)
-corrected_tokens = []
+def koreksi(algorithm):
+    dictionary = ["on", "off", "fan", "tv", "television", "PC", "lamp", "turn"]
+    user_query = input("Masukkan kalimat : ")
 
-tokens = tokenize(user_query)
+    corrected_tokens = []
 
-similarity_threshold = 0.2
+    tokens = tokenize(user_query)
 
-for token in tokens:
-    if token in [".", ",", "!", "?", ":", ";", "the"]:
-        corrected_tokens.append(token)
-        continue
-    best_match = max(
-        dictionary, key=lambda dict_word: jaccard.jakar(token, dict_word))
-    corrected_tokens.append(best_match)
+    for token in tokens:
+        if token in [".", ",", "!", "?", ":", ";", "the"]:
+            corrected_tokens.append(token)
+            continue
+        best_match = max(
+            dictionary, key=lambda dict_word: calculate_similarity(
+                algorithm, token, dict_word))
+        corrected_tokens.append(best_match)
 
-kalimatnya = ' '.join(corrected_tokens)
-print(f" CORRECT JARO : {kalimatnya}")
+    kalimatnya = ' '.join(corrected_tokens)
+    # print(f" CORRECT  : {kalimatnya}")
+    return kalimatnya
+
+
+jackar = koreksi(jaccard.jakar)
+jarno = koreksi(jaroDistance.jaro)
+print(f"jaccard : {jackar}")
+print(f"Jaro : {jarno}")
 # for benar_kata in dictionary:
 #     # benar_set = set(benar_kata)
 #     # if tokens != benar_kata:

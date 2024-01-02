@@ -77,8 +77,8 @@ def jaro_distance(user, dicti, similarity_threshold=0.2):
         if not kondisi:
             kalimat_benar.append(kata)
 
-    kalimatnya = ' '.join(kalimat_benar)
-    print(f" CORRECT JACCARD : {kalimatnya}")
+    # kalimatnya = ' '.join(kalimat_benar)
+    # print(f" CORRECT JACCARD : {kalimatnya}")
 
 
 # jaro_distance(berkata, benar)
