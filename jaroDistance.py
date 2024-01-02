@@ -1,55 +1,95 @@
-def jaro_distance(s1, s2):
-    # Jika string sama, return 1
-    if s1 == s2:
+def jaro(s, t):
+    s_len = len(s)
+    t_len = len(t)
+    # print(f"type s_len : {type(t_len)}")
+    # print(f"type t_len : {type(t_len)}")
+
+    if s_len == 0 and t_len == 0:
         return 1.0
 
-    # Panjang string dan jarak pencarian
-    len_s1, len_s2 = len(s1), len(s2)
-    max_distance = int(max(len_s1, len_s2) / 2) - 1
-    print(
-        f"len_s1 : {len_s1} || len_s2 : {len_s2} || max distance : {max_distance}")
+    match_distance = max(s_len, t_len) // 2 - 1
+    s_matches = [False] * s_len
+    t_matches = [False] * t_len
+    matches = 0
+    transpositions = 0
+    # print(f"s_len : {s_len}")
+    # print(f"t_len : {t_len}")
 
-    # Menandai karakter yang sama di kedua string
-    match_s1 = [False] * len_s1
-    match_s2 = [False] * len_s2
+    # print(f"s_matches : {s_matches}")
+    # print(f"t_matches : {t_matches}")
 
-    # Menghitung jumlah match dan transposisi
-    matches, transpositions = 0, 0
-    for i in range(len_s1):
-        start, end = max(0, i - max_distance), min(i +
-                                                   max_distance + 1, len_s2)
+    for i in range(s_len):
+        start = max(0, i - match_distance)
+        end = min(i + match_distance + 1, t_len)
+
         for j in range(start, end):
-            if match_s2[j]:
+            if t_matches[j]:
                 continue
-            if s1[i] != s2[j]:
+            if s[i] != t[j]:
                 continue
+            s_matches[i] = True
+            t_matches[j] = True
             matches += 1
-            match_s1[i] = True
-            match_s2[j] = True
             break
 
     if matches == 0:
         return 0.0
 
     k = 0
-    for i in range(len_s1):
-        if not match_s1[i]:
+    for i in range(s_len):
+        if not s_matches[i]:
             continue
-        while not match_s2[k]:
+        while not t_matches[k]:
             k += 1
-        if s1[i] != s2[k]:
+        if s[i] != t[k]:
             transpositions += 1
         k += 1
 
-    transpositions //= 2
-
-    print(f"match s1 : {match_s1}")
-    print(f"match s1 : {match_s2}")
-    print(f"transposisi : {transpositions}")
-
-    return (matches / len_s1 + matches / len_s2 + (matches - transpositions) / matches) / 3
+    return ((matches / s_len) +
+            (matches / t_len) +
+            ((matches - transpositions // 2) / matches)) / 3
 
 
-# Contoh penggunaan
-distance = jaro_distance("MARTHA", "MARHTA")
-print("Jaro Distance:", distance)
+# benar = ["tv", "on", "lamp", "turn"]
+# kalimat = input("Masukkan kalimat : ")
+# berkata = kalimat.split()
+
+
+def jaro_distance(user, dicti, similarity_threshold=0.2):
+    kalimat_benar = []
+    for kata in user:
+        kata_set = set(kata)
+        kondisi = False
+        if kata in [".", ",", "!", "?", ":", ";", "the"]:
+            kalimat_benar.append(kata)
+            continue
+        for benar_kata in dicti:
+            benar_set = set(benar_kata)
+            similarity = jaro(str(kata_set), str(benar_set))
+            if similarity > similarity_threshold:
+                kalimat_benar.append(benar_kata)
+                kondisi = True
+                print("Hasil kesamaan Jaccard antara kalimat input '" + kata +
+                      "' dan kalimat benar '" + benar_kata + "' adalah " + str(similarity))
+                print(f" kata_set : {kata}")
+                print(f" benar_kata : {benar_kata}")
+
+        if not kondisi:
+            kalimat_benar.append(kata)
+
+    kalimatnya = ' '.join(kalimat_benar)
+    print(f" CORRECT JACCARD : {kalimatnya}")
+
+
+# jaro_distance(berkata, benar)
+
+# # Contoh penggunaan
+# benar = ["tv", "on", "lamp", "turn"]
+# kalimat = input("Masukkan kalimat : ")
+# berkata = kalimat.split()
+# similarity_threshold = 0.5
+# kalimat_benar = []
+
+# # print(type(berkata))
+# distance = jaro_distance(berkata, )
+# print("Jaro Distance:", distance)

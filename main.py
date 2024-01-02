@@ -3,7 +3,7 @@ import jaccard
 # import damerauLevi
 # import diceCoef
 # import euclidienDistance
-# import jaroDistance
+import jaroDistance
 # import jaroWinkler
 # import levenshteinD
 # import manhattan
@@ -13,43 +13,85 @@ import jaccard
 # import longestCommon
 # import needlemanWunsch
 import time
+import numpy as np
+import json
+# from nltk import word_tokenize
+
+
+def calculate_similarity(algorithm, token1, token2):
+    return algorithm(token1, token2)
 
 
 def tokenize(query):
-    return set(query.lower().split())
+    return query.lower().split()
 
 
-# jaccard.jekar()
-dictionary = ["on", "off", "fan", "tv", "television", "PC", "lamp"]
+def nilai_tertinggi(datalist):
+    if not datalist:
+        return None  # Kembalikan None jika daftar kosong
+    # Mencari elemen dengan nilai tertinggi
+    max_value = max(datalist, key=lambda x: x[1])
+    return max_value[0]  # Mengembalikan string di samping nilai tertinggi
+
+
+dictionary = ["on", "off", "fan", "tv", "television", "PC", "lamp", "turn"]
 user_query = input("Masukkan kalimat : ")
-# user_query = user_query.lower()  # Convert query to lowercase
+print("isinya user query", user_query)
+corrected_tokens = []
 
-corrected_tokens = []  # create a new array of text
+tokens = tokenize(user_query)
+
+similarity_threshold = 0.2
+
+for token in tokens:
+    if token in [".", ",", "!", "?", ":", ";", "the"]:
+        corrected_tokens.append(token)
+        continue
+    best_match = max(
+        dictionary, key=lambda dict_word: jaccard.jakar(token, dict_word))
+    corrected_tokens.append(best_match)
+
+kalimatnya = ' '.join(corrected_tokens)
+print(f" CORRECT JARO : {kalimatnya}")
+# for benar_kata in dictionary:
+#     # benar_set = set(benar_kata)
+#     # if tokens != benar_kata:
+#     similarity_jaro = jaccard.jakar(token, benar_kata)
+#     hasil.append((benar_kata, similarity_jaro))
+
+#     # print(f"hasil : {hasil}")
+
+#     # print("Hasil kesamaan Jaro antara kalimat input '" + token +
+#     #       "' dan kalimat benar '" + benar_kata + "' adalah " + str(similarity_jaro))
+#     # print(f" kata_set : {token}")
+#     # print(f" benar_kata : {benar_kata}")
+# result = nilai_tertinggi(hasil)
+# print(f"hasil : {hasil}")
+# print(result)
+# corrected_tokens.append(result)
+
+# else:
+#     corrected_tokens.append(benar_kata)
+
+# sorting(token, benar_kata, similarity_jaro)
+# sorting(similarity_jaro)
+# print(sorting(similarity_jaro))
+# siapa yang paling tinggi scorenya
+# variabel hasil dikosongkan
 
 
-for kata in user_query:
-    tokens = tokenize(user_query)  # Tokenize the user query string
-    start_time = time.time()  # Start measuring time
-    for token in tokens:
-        if token in [".", ",", "!", "?", ":", ";", "the"]:
-            corrected_tokens.append(token)
-            for benar_kata in dictionary:
-                benar_set = tokenize(benar_kata)
-                jaccard.jekar(tokens, benar_set)
-                # similarity = jaccard.jakar(tokens, benar_set)
-                # corrected_tokens.append(benar_kata)
-                # print("Hasil kesamaan Jaccard antara kalimat input '" + kata +
-                #       "' dan kalimat benar '" + benar_kata + "' adalah " + str(similarity))
-                # print(f" kata_set : {tokens}")
-                # print(f" benar_kata : {benar_kata}")
-                break
+# hasil_json = json.dumps(hasil)
+# print(hasil)
+# Memfilter data untuk kata "on"
 
 
+# result = nilai_tertinggi(hasil)
+# print("Nilai tertinggi:", result)
 # result = text_correction(token)
 # corrected_tokens.append(token)
 # elapsed_time = time.time() - start_time
 # corrected_sentence = " ".join(corrected_tokens)
-
+# print(f"token akhir : {token}")
 # kalimatnya = ' '.join(corrected_tokens)
-# print(f" HASILNYA : {kalimatnya}")
+# print(f"CORECTED_TOKENS: {kalimatnya}")
 # print(user_query)
