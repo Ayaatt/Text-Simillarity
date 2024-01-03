@@ -28,8 +28,8 @@ def smith_waterman(seq1, seq2, match_score=3, gap_cost=2):
     return max_score
 
 
-# Example usage
-seq1 = "AGCACACA"
-seq2 = "ACACACTA"
-alignment_score = smith_waterman(seq1, seq2)
-print("Smith-Waterman Alignment Score:", alignment_score)
+# # Example usage
+# seq1 = "AGCACACA"
+# seq2 = "ACACACTA"
+# alignment_score = smith_waterman(seq1, seq2)
+# print("Smith-Waterman Alignment Score:", alignment_score)

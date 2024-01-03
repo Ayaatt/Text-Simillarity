@@ -10,6 +10,6 @@ def hamming_distance(str1, str2):
     return distance
 
 
-# Contoh penggunaan
-distance = hamming_distance("karat", "karetnya")
-print("Hamming Distance:", distance)
+# # Contoh penggunaan
+# distance = hamming_distance("karat", "karetnya")
+# print("Hamming Distance:", distance)

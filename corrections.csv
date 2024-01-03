@@ -1,0 +1,20 @@
+Input,Jaccard Corrected,JaroDistance Corrected,Jaccard Time,JaroDistance Time,Jaccard Accuracy,JaroDistance Accuracy
+turn on the tea.,turn on the gate,turn on the enable,0.0017185211181640625,0.0008592605590820312,0.8666666666666667,0.8703703703703703
+turn off the flight.,turn off the light,turn off the light,0.0025777816772460938,0.0,0.9047619047619048,0.9682539682539683
+look the door.,lock the back door,lock the on,0.0017185211181640625,0.0,0.5416666666666666,0.7
+unluck the door.,unlock the back door,unlock the on,0.0017185211181640625,0.0,0.5833333333333334,0.7277777777777779
+turn on the lump.,turn on the lamp,turn on the lamp,0.0046215057373046875,0.0010218620300292969,0.8333333333333334,0.9277777777777777
+look the windows.,lock the windows,lock the windows,0.0037622451782226562,0.0,0.8035714285714286,0.8958333333333334
+unluck the windows.,unlock the windows,unlock the windows,0.0037622451782226562,0.0,0.8452380952380952,0.9236111111111112
+turn on the van.,turn on the fan,turn on the fan,0.005643367767333984,0.0,0.7999999999999999,0.9074074074074074
+turn off the van.,turn off the fan,turn off the fan,0.007596492767333984,0.0009765625,0.7999999999999999,0.9074074074074074
+turn on the hater.,turn on the gate,turn on the gate,0.008573055267333984,0.0,0.8095238095238094,0.9166666666666666
+unable the hater.,enable the gate,enable the gate,0.005715370178222656,0.0,0.6309523809523809,0.8194444444444444
+disassemble the back door.,disable the back door back door,disable the back door on,0.009549617767333984,0.0,0.5694444444444444,0.7375501042167709
+unluck the back door.,unlock the back door back door,unlock the back door on,0.011502742767333984,0.0,0.5555555555555556,0.7567901234567902
+look the gate.,lock the gate,lock the gate,0.007668495178222656,0.0,0.775,0.8833333333333333
+unluck the gate.,unlock the gate,unlock the gate,0.007668495178222656,0.0,0.8166666666666667,0.9111111111111111
+turn on the over.,turn on the oven,turn on the oven,0.012480974197387695,0.0,0.8333333333333334,0.9277777777777777
+turn off the over.,turn off the oven,turn off the oven,0.014437437057495117,0.0,0.8333333333333334,0.9277777777777777
+oven the gate.,oven the gate,oven the gate,0.009624958038330078,0.0,0.9,0.9666666666666666
+clause the gate.,close the gate,close the gate,0.009624958038330078,0.0,0.6857142857142857,0.8777777777777778

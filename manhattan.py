@@ -18,14 +18,14 @@ def manhattan_distance(vec1, vec2):
     return sum(abs(vec1.get(word, 0) - vec2.get(word, 0)) for word in all_words)
 
 
-# Contoh penggunaan
-text1 = "aku adalah pengangguran akut"
-text2 = "aku ini pengangguran akut"
+# # Contoh penggunaan
+# text1 = "aku adalah pengangguran akut"
+# text2 = "aku ini pengangguran akut"
 
-vector1 = text_to_vector(text1)
-vector2 = text_to_vector(text2)
-print(f"Vektor 1 : {vector1}")
-print(f"Vektor 1 : {vector2}")
+# vector1 = text_to_vector(text1)
+# vector2 = text_to_vector(text2)
+# print(f"Vektor 1 : {vector1}")
+# print(f"Vektor 1 : {vector2}")
 
-distance = manhattan_distance(vector1, vector2)
-print("Manhattan Distance:", distance)
+# distance = manhattan_distance(vector1, vector2)
+# print("Manhattan Distance:", distance)

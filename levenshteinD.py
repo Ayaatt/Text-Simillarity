@@ -24,6 +24,6 @@ def levenshtein_distance(str1, str2):
     return matrix[-1][-1]
 
 
-# Contoh penggunaan
-distance = levenshtein_distance("rat", "cat")
-print("Levenshtein Distance:", distance)
+# # Contoh penggunaan
+# distance = levenshtein_distance("rat", "cat")
+# print("Levenshtein Distance:", distance)

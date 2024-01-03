@@ -25,8 +25,8 @@ def needleman_wunsch(seq1, seq2, match_score=1, gap_cost=-1, mismatch_cost=-1):
     return score_matrix[-1][-1]  # Return the final score
 
 
-# Test the function
-seq1 = "mau"
-seq2 = "mia"
-alignment_score = needleman_wunsch(seq1, seq2)
-print("Alignment Score:", alignment_score)
+# # Test the function
+# seq1 = "mau"
+# seq2 = "mia"
+# alignment_score = needleman_wunsch(seq1, seq2)
+# print("Alignment Score:", alignment_score)

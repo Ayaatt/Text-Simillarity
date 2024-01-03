@@ -45,8 +45,8 @@ def longest_common_subsequence(X, Y):
     return "".join(lcs)
 
 
-# Example usage
-X = "AGGTAB"
-Y = "GXTXAYB"
-lcs = longest_common_subsequence(X, Y)
-print("Longest Common Subsequence:", lcs)
+# # Example usage
+# X = "AGGTAB"
+# Y = "GXTXAYB"
+# lcs = longest_common_subsequence(X, Y)
+# print("Longest Common Subsequence:", lcs)
