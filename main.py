@@ -9,7 +9,7 @@ import levenshteinD
 import manhattan
 import nGram
 import smithWaterman
-import hamstringDistance
+import hammingDistance
 import longestCommon
 import needlemanWunsch
 from datetime import datetime
@@ -171,7 +171,7 @@ def process_input_dataframe(df, algorithms, dictionary):
             similarity_scores_euc.append(best_similarity_euc)
             times_euc.append(time.time() - start_time_euc)
 
-            # Hamstring correction and similarity calculation
+            # hamming correction and similarity calculation
             best_match_hams, best_similarity_hams = best_match_and_score(
                 algorithms[1][1], token, dictionary)
             corrected_tokens_hams.append(best_match_hams)
@@ -252,7 +252,7 @@ def process_input_dataframe(df, algorithms, dictionary):
             'Cosine Corrected': corrected_sentence_cosine,
             'Damerau-Levenshtein Corrected': corrected_sentence_dama,
             'Euclidien Distance Corrected': corrected_sentence_euc,
-            'Hamstring Distance Corrected': corrected_sentence_hams,
+            'hamming Distance Corrected': corrected_sentence_hams,
             'Jaro-Winkler Corrected': corrected_sentence_jaroWin,
             'Longest Common Corrected': corrected_sentence_longes,
             'Levenshtein Distance Corrected': corrected_sentence_leven,
@@ -266,7 +266,7 @@ def process_input_dataframe(df, algorithms, dictionary):
             'Cosine Time': sum(times_cosine),
             'Damerau-Levenshtein Time': sum(times_dama),
             'Euclidien Distance Time': sum(times_euc),
-            'Hamstring Distance Time': sum(times_hams),
+            'hamming Distance Time': sum(times_hams),
             'Jaro-Winkler Time': sum(times_jaroWin),
             'Longest Common Time': sum(times_longes),
             'Levenshtein Distance Time': sum(times_leven),
@@ -280,7 +280,7 @@ def process_input_dataframe(df, algorithms, dictionary):
             'Cosine Accuracy': np.mean(similarity_scores_cosine),
             'Damerau-Levenshtein Accuracy': np.mean(similarity_scores_dama),
             'Euclidien Distance Accuracy': np.mean(similarity_scores_euc),
-            'Hamstring Distance Accuracy': np.mean(similarity_scores_hams),
+            'hamming Distance Accuracy': np.mean(similarity_scores_hams),
             'Jaro-Winkler Accuracy': np.mean(similarity_scores_jaroWin),
             'Longest Common Accuracy': np.mean(similarity_scores_longes),
             'Levenshtein Distance Accuracy': np.mean(similarity_scores_leven),
@@ -327,7 +327,7 @@ algorithms_to_use = [
     ('damerau-levenshtein', damerauLevi.damerau_levenshtein_distance),
     ('dice', diceCoef.dice_coefficient),
     ('euclidien', euclidienDistance.euclidean_distance),
-    ('hamstring', hamstringDistance.hamming_distance),
+    ('hamming', hammingDistance.hamming_distance),
     ('jaro-winkler', jaroWinkler.jaro_winkler_similarity),
     ('levenshtein', levenshteinD.levenshtein_distance),
     ('longest', longestCommon.longest_common_subsequence),
