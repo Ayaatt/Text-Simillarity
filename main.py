@@ -66,7 +66,8 @@ def process_input_dataframe(df, algorithms, dictionary):
     start_time_ngram = time.time()
     start_time_smith = time.time()
 
-    for input_token in df['Input']:
+    for input_token, ground_truth in zip(df['Input'], ground_truth_sentences):
+        print(f"{df['Input']}")
         tokens = tokenize(input_token)
         corrected_tokens_jaccard = []
         corrected_tokens_jaro = []
@@ -112,7 +113,7 @@ def process_input_dataframe(df, algorithms, dictionary):
         times_smith = []
 
         for token in tokens:
-            if token in [".", ",", "!", "?", ":", ";", "the"] or token in dictionary:
+            if token in [".", ",", "!", "?", ":", ";", "the"]:
                 corrected_tokens_jaccard.append(token)
                 corrected_tokens_jaro.append(token)
                 corrected_tokens_dice.append(token)
@@ -128,101 +129,103 @@ def process_input_dataframe(df, algorithms, dictionary):
                 corrected_tokens_ngram.append(token)
                 corrected_tokens_smith.append(token)
                 continue
-
+            # for ground in dictionary['Original']:
+            #     truth = tokenize(ground)
+                # print(f"{dictionary['Original']}")
             # Jaccard correction and similarity calculation
             best_match_jaccard, best_similarity_jaccard = best_match_and_score(
-                algorithms[0][1], token, dictionary)
+                algorithms[0][1], token, tokenize(ground_truth))
             corrected_tokens_jaccard.append(best_match_jaccard)
             similarity_scores_jaccard.append(best_similarity_jaccard)
             times_jaccard.append(time.time() - start_time_jaccard)
 
             # Jaro correction and similarity calculation
             best_match_jaro, best_similarity_jaro = best_match_and_score(
-                algorithms[1][1], token, dictionary)
+                algorithms[1][1], token, tokenize(ground_truth))
             corrected_tokens_jaro.append(best_match_jaro)
             similarity_scores_jaro.append(best_similarity_jaro)
             times_jaro.append(time.time() - start_time_jaro)
 
             # Dama correction and similarity calculation
             best_match_dama, best_similarity_dama = best_match_and_score(
-                algorithms[1][1], token, dictionary)
+                algorithms[1][1], token, tokenize(ground_truth))
             corrected_tokens_dama.append(best_match_dama)
             similarity_scores_dama.append(best_similarity_dama)
             times_dama.append(time.time() - start_time_dama)
 
             # Dice correction and similarity calculation
             best_match_dice, best_similarity_dice = best_match_and_score(
-                algorithms[1][1], token, dictionary)
+                algorithms[1][1], token, tokenize(ground_truth))
             corrected_tokens_dice.append(best_match_dice)
             similarity_scores_dice.append(best_similarity_dice)
             times_dice.append(time.time() - start_time_dice)
 
             # Cosine correction and similarity calculation
             best_match_cosine, best_similarity_cosine = best_match_and_score(
-                algorithms[1][1], token, dictionary)
+                algorithms[1][1], token, tokenize(ground_truth))
             corrected_tokens_cosine.append(best_match_cosine)
             similarity_scores_cosine.append(best_similarity_cosine)
             times_cosine.append(time.time() - start_time_cosine)
 
             # Euclidien Distance correction and similarity calculation
             best_match_euc, best_similarity_euc = best_match_and_score(
-                algorithms[1][1], token, dictionary)
+                algorithms[1][1], token, tokenize(ground_truth))
             corrected_tokens_euc.append(best_match_euc)
             similarity_scores_euc.append(best_similarity_euc)
             times_euc.append(time.time() - start_time_euc)
 
             # hamming correction and similarity calculation
             best_match_hams, best_similarity_hams = best_match_and_score(
-                algorithms[1][1], token, dictionary)
+                algorithms[1][1], token, tokenize(ground_truth))
             corrected_tokens_hams.append(best_match_hams)
             similarity_scores_hams.append(best_similarity_hams)
             times_hams.append(time.time() - start_time_hams)
 
             # Jaro-Winkler correction and similarity calculation
             best_match_jaroWin, best_similarity_jaroWin = best_match_and_score(
-                algorithms[1][1], token, dictionary)
+                algorithms[1][1], token, tokenize(ground_truth))
             corrected_tokens_jaroWin.append(best_match_jaroWin)
             similarity_scores_jaroWin.append(best_similarity_jaroWin)
             times_jaroWin.append(time.time() - start_time_jaroWin)
 
             # Longest correction and similarity calculation
             best_match_longes, best_similarity_longes = best_match_and_score(
-                algorithms[1][1], token, dictionary)
+                algorithms[1][1], token, tokenize(ground_truth))
             corrected_tokens_longes.append(best_match_longes)
             similarity_scores_longes.append(best_similarity_longes)
             times_longes.append(time.time() - start_time_longes)
 
             # Levenshtein correction and similarity calculation
             best_match_leven, best_similarity_leven = best_match_and_score(
-                algorithms[1][1], token, dictionary)
+                algorithms[1][1], token, tokenize(ground_truth))
             corrected_tokens_leven.append(best_match_leven)
             similarity_scores_leven.append(best_similarity_leven)
             times_leven.append(time.time() - start_time_leven)
 
             # Manhattan correction and similarity calculation
             best_match_manha, best_similarity_manha = best_match_and_score(
-                algorithms[1][1], token, dictionary)
+                algorithms[1][1], token, tokenize(ground_truth))
             corrected_tokens_manha.append(best_match_manha)
             similarity_scores_manha.append(best_similarity_manha)
             times_manha.append(time.time() - start_time_manha)
 
             # Needleman correction and similarity calculation
             best_match_need, best_similarity_need = best_match_and_score(
-                algorithms[1][1], token, dictionary)
+                algorithms[1][1], token, tokenize(ground_truth))
             corrected_tokens_need.append(best_match_need)
             similarity_scores_need.append(best_similarity_need)
             times_need.append(time.time() - start_time_need)
 
             # N-Gram correction and similarity calculation
             best_match_ngram, best_similarity_ngram = best_match_and_score(
-                algorithms[1][1], token, dictionary)
+                algorithms[1][1], token, tokenize(ground_truth))
             corrected_tokens_ngram.append(best_match_ngram)
             similarity_scores_ngram.append(best_similarity_ngram)
             times_ngram.append(time.time() - start_time_ngram)
 
             # Smith correction and similarity calculation
             best_match_smith, best_similarity_smith = best_match_and_score(
-                algorithms[1][1], token, dictionary)
+                algorithms[1][1], token, tokenize(ground_truth))
             corrected_tokens_smith.append(best_match_smith)
             similarity_scores_smith.append(best_similarity_smith)
             times_smith.append(time.time() - start_time_smith)
@@ -245,6 +248,7 @@ def process_input_dataframe(df, algorithms, dictionary):
 
         # Add the results to the dataframe
         result_row = {
+            'Original': ground_truth,
             'Input': input_token,
             'Jaccard Corrected': corrected_sentence_jaccard,
             'JaroDistance Corrected': corrected_sentence_jaro,
@@ -296,29 +300,54 @@ def process_input_dataframe(df, algorithms, dictionary):
 
 # Define the list of input tokens
 input_tokens = [
-    "turn on the tea.",
-    "turn off the flight.",
-    "look the door.",
-    "unluck the door.",
-    "turn on the lump.",
-    "look the windows.",
-    "unluck the windows.",
-    "turn on the van.",
-    "turn off the van.",
-    "turn on the hater.",
-    "unable the hater.",
-    "disassemble the back door.",
-    "unluck the back door.",
-    "look the gate.",
-    "unluck the gate.",
-    "turn on the over.",
-    "turn off the over.",
-    "oven the gate.",
-    "clause the gate."
+    "turn on the tea",
+    "turn off the flight",
+    "look the door",
+    "unluck the door",
+    "turn on the lump",
+    "look the windows",
+    "unluck the windows",
+    "turn on the van",
+    "turn off the van",
+    "turn on the hater",
+    "unable the hater",
+    "disassemble the back door",
+    "unluck the back door",
+    "look the gate",
+    "unluck the gate",
+    "turn on the over",
+    "turn off the over",
+    "oven the gate",
+    "clause the gate"
 ]
+
+ground_truth_sentences = [
+    "turn on the tv",
+    "turn off the light",
+    "lock the door",
+    "unlock the door",
+    "turn on the lamp",
+    "lock the windows",
+    "unlock the windows",
+    "turn on the fan",
+    "turn off the fan",
+    "turn on the heater",
+    "enable the heater",
+    "disable the back door",
+    "unlock the back door",
+    "lock the gate",
+    "unlock the gate",
+    "turn on the oven",
+    "turn off the oven",
+    "open the gate",
+    "close the gate"
+]
+
 
 # Create a DataFrame from the list of input tokens
 df_input = pd.DataFrame(input_tokens, columns=['Input'])
+df_output = pd.DataFrame(ground_truth_sentences, columns=['Original'])
+
 # Define the algorithms to use
 algorithms_to_use = [
     ('jaccard', jaccard.jakar),
@@ -339,13 +368,13 @@ algorithms_to_use = [
 
 
 # Define the dictionary of correct words
-dictionary = ["on", "off", "fan", "tv", "television",
-              "PC", "lamp", "turn", "unlock", "lock", "gate", "light", "windows", "back door", "oven", "open", "close", "enable", "disable"]
+# dictionary = ["on", "off", "fan", "tv", "television",
+#               "PC", "lamp", "turn", "unlock", "lock", "gate", "light", "windows", "back door", "oven", "open", "close", "enable", "disable"]
 
 
 # Process the DataFrame with the provided input tokens
 df_results = process_input_dataframe(
-    df_input, algorithms_to_use, dictionary)
+    df_input, algorithms_to_use, df_output)
 
 tabel = tabulate(df_results, headers='keys', tablefmt='grid')
 
