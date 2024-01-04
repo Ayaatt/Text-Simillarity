@@ -22,6 +22,309 @@ import pandas as pd
 import csv
 from tabulate import tabulate
 # from nltk import word_tokenize
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///similarity.db'
+# db = SQLAlchemy(app)
+
+
+# class algoritma(db.Model):
+# __tablename__ = 'algoritma'
+# ID = db.Column(db.Integer, primary_key=True)
+# originalData = db.Column(db.String)
+# inputData = db.Column(db.String)
+# Jaccard_Corrected_data = db.Column(db.String),
+# JaroDistance_Corrected_data = db.Column(db.String),
+# Dice_Coefficien_Corrected = db.Column(db.String),
+# Cosine_Corrected_data = db.Column(db.String),
+# Damerau_Levenshtein_Corrected = db.Column(db.String),
+# Euclidien_Distance_Corrected = db.Column(db.String),
+# hamming_Distance_Corrected = db.Column(db.String),
+# Jaro_Winkler_Corrected = db.Column(db.String),
+# Longest_Common_Corrected = db.Column(db.String),
+# Levenshtein_Distance_Corrected = db.Column(db.String),
+# Manhattan_Corrected = db.Column(db.String),
+# Needleman_Corrected = db.Column(db.String),
+# N_Gram_Corrected = db.Column(db.String),
+# Smith_Waterman_Corrected = db.Column(db.String),
+# Jaccard_Time = db.Column(db.Float),
+# JaroDistance_Time = db.Column(db.Float),
+# Dice_Coefficien_Time = db.Column(db.Float),
+# Cosine_Time = db.Column(db.Float),
+# Damerau_Levenshtein_Time = db.Column(db.Float),
+# Euclidien_Distance_Time = db.Column(db.Float),
+# hamming_Distance_Time = db.Column(db.Float),
+# Jaro_Winkler_Time = db.Column(db.Float),
+# Longest_Common_Time = db.Column(db.Float),
+# Levenshtein_Distance_Time = db.Column(db.Float),
+# Manhattan_Time = db.Column(db.Float),
+# Needleman_Time = db.Column(db.Float),
+# N_Gram_Time = db.Column(db.Float),
+# Smith_Waterman_Time = db.Column(db.Float),
+# Jaccard_Accuracy = db.Column(db.Float),
+# JaroDistance_Accuracy = db.Column(db.Float),
+# Dice_Coefficien_Accuracy = db.Column(db.Float),
+# Cosine_Accuracy = db.Column(db.Float),
+# Damerau_Levenshtein_Accuracy = db.Column(db.Float),
+# Euclidien_Distance_Accuracy = db.Column(db.Float),
+# hamming_Distance_Accuracy = db.Column(db.Float),
+# Jaro_Winkler_Accuracy = db.Column(db.Float),
+# Longest_Common_Accuracy = db.Column(db.Float),
+# Levenshtein_Distance_Accuracy = db.Column(db.Float),
+# Manhattan_Accuracy = db.Column(db.Float),
+# Needleman_Accuracy = db.Column(db.Float),
+# N_Gram_Accuracy = db.Column(db.Float),
+# Smith_Waterman_Accuracy = db.Column(db.Float),
+
+
+# from nltk import word_tokenize
+# with app.app_context():
+#     try:
+#         if not os.path.exists('similarity.db'):
+#             db.create_all()
+#             print('Database and tables created successfully')
+#     except Exception as e:
+#         print(f'Error creating database and tables: {e}')
+
+
+# @app.route('/add_data', methods=['POST'])
+# def add_data():
+# data = request.get_json()
+# new_data = algoritma(
+#     originalData=data['originalData'],
+#     inputData=data['inputData'],
+#     Jaccard_Corrected_data=data['Jaccard_Corrected_data'],
+#     JaroDistance_Corrected_data=data['JaroDistance_Corrected_data'],
+#     Dice_Coefficien_Corrected=data['Dice_Coefficien_Corrected'],
+#     Cosine_Corrected_data=data['Cosine_Corrected_data'],
+#     Damerau_Levenshtein_Corrected=data['Damerau_Levenshtein_Corrected'],
+#     Euclidien_Distance_Corrected=data['Euclidien_Distance_Corrected'],
+#     hamming_Distance_Corrected=data['hamming_Distance_Corrected'],
+#     Jaro_Winkler_Corrected=data['Jaro_Winkler_Corrected'],
+#     Longest_Common_Corrected=data['Longest_Common_Corrected'],
+#     Levenshtein_Distance_Corrected=data['Levenshtein_Distance_Corrected'],
+#     Manhattan_Corrected=data['Manhattan_Corrected'],
+#     Needleman_Corrected=data['Needleman_Corrected'],
+#     N_Gram_Corrected=data['N_Gram_Corrected'],
+#     Smith_Waterman_Corrected=data['Smith_Waterman_Corrected'],
+#     Jaccard_Time=data['Jaccard_Time'],
+#     JaroDistance_Time=data['JaroDistance_Time'],
+#     Dice_Coefficien_Time=data['Dice_Coefficien_Time'],
+#     Cosine_Time=data['Cosine_Time'],
+#     Damerau_Levenshtein_Time=data['Damerau_Levenshtein_Time'],
+#     Euclidien_Distance_Time=data['Euclidien_Distance_Time'],
+#     hamming_Distance_Time=data['hamming_Distance_Time'],
+#     Jaro_Winkler_Time=data['Jaro_Winkler_Time'],
+#     Longest_Common_Time=data['Longest_Common_Time'],
+#     Levenshtein_Distance_Time=data['Levenshtein_Distance_Time'],
+#     Manhattan_Time=data['Manhattan_Time'],
+#     Needleman_Time=data['Needleman_Time'],
+#     N_Gram_Time=data['N_Gram_Time'],
+#     Smith_Waterman_Time=data['Smith_Waterman_Time'],
+#     Jaccard_Accuracy=data['Jaccard_Accuracy'],
+#     JaroDistance_Accuracy=data['JaroDistance_Accuracy'],
+#     Dice_Coefficien_Accuracy=data['Dice_Coefficien_Accuracy'],
+#     Cosine_Accuracy=data['Cosine_Accuracy'],
+#     Damerau_Levenshtein_Accuracy=data['Damerau_Levenshtein_Accuracy'],
+#     Euclidien_Distance_Accuracy=data['Euclidien_Distance_Accuracy'],
+#     hamming_Distance_Accuracy=data['hamming_Distance_Accuracy'],
+#     Jaro_Winkler_Accuracy=data['Jaro_Winkler_Accuracy'],
+#     Longest_Common_Accuracy=data['Longest_Common_Accuracy'],
+#     Levenshtein_Distance_Accuracy=data['Levenshtein_Distance_Accuracy'],
+#     Manhattan_Accuracy=data['Manhattan_Accuracy'],
+#     Needleman_Accuracy=data['Needleman_Accuracy'],
+#     N_Gram_Accuracy=data['N_Gram_Accuracy'],
+#     Smith_Waterman_Accuracy=data['Smith_Waterman_Accuracy']
+# )
+
+# # Add the new data to the database
+# db.session.add(new_data)
+# db.session.commit()
+
+# return "Data added successfully", 201
+
+
+# @app.route('/show_all_data_html')
+# def show_all_data_html():
+# users = algoritma.query.all()
+# users_data = []
+# for user in users:
+#     user_data = {
+#         'Original': user.originalData,
+#         'Input': user.input_data,
+#         'Jaccard Corrected': user.Jaccard_Corrected_data,
+#         'JaroDistance Corrected': user.JaroDistance_Corrected_data,
+#         'Dice Coefficien Corrected': user.Dice_Coefficien_Corrected,
+#         'Cosine Corrected': user.Cosine_Corrected_data,
+#         'Damerau-Levenshtein Corrected': user.Damerau_Levenshtein_Corrected,
+#         'Euclidien Distance Corrected': user.Euclidien_Distance_Corrected,
+#         'hamming Distance Corrected': user.hamming_Distance_Corrected,
+#         'Jaro-Winkler Corrected': user.Jaro_Winkler_Corrected,
+#         'Longest Common Corrected': user.Longest_Common_Corrected,
+#         'Levenshtein Distance Corrected': user.Levenshtein_Distance_Corrected,
+#         'Manhattan Corrected': user.Manhattan_Corrected,
+#         'Needleman Corrected': user.Needleman_Corrected,
+#         'N-Gram Corrected': user.N_Gram_Corrected,
+#         'Smith Waterman Corrected': user.Smith_Waterman_Corrected,
+#         'Jaccard Time': user.Jaccard_Time,
+#         'JaroDistance Time': user.JaroDistance_Time,
+#         'Dice Coefficien Time': user.Dice_Coefficien_Time,
+#         'Cosine Time': user.Cosine_Time,
+#         'Damerau-Levenshtein Time': user.Damerau_Levenshtein_Time,
+#         'Euclidien Distance Time': user.Euclidien_Distance_Time,
+#         'hamming Distance Time': user.hamming_Distance_Time,
+#         'Jaro-Winkler Time': user.Jaro_Winkler_Time,
+#         'Longest Common Time': user.Longest_Common_Time,
+#         'Levenshtein Distance Time': user.Levenshtein_Distance_Time,
+#         'Manhattan Time': user.Manhattan_Time,
+#         'Needleman Time': user.Needleman_Time,
+#         'N-Gram Time': user.N_Gram_Time,
+#         'Smith Waterman Time': user.Smith_Waterman_Corrected,
+#         'Jaccard Accuracy': user.Jaccard_Accuracy,
+#         'JaroDistance Accuracy': user.JaroDistance_Accuracy,
+#         'Dice Coefficien Accuracy': user.Dice_Coefficien_Accuracy,
+#         'Cosine Accuracy': user.Cosine_Accuracy,
+#         'Damerau-Levenshtein Accuracy': user.Damerau_Levenshtein_Accuracy,
+#         'Euclidien Distance Accuracy': user.Euclidien_Distance_Accuracy,
+#         'hamming Distance Accuracy': user.hamming_Distance_Accuracy,
+#         'Jaro-Winkler Accuracy': user.Jaro_Winkler_Accuracy,
+#         'Longest Common Accuracy': user.Longest_Common_Accuracy,
+#         'Levenshtein Distance Accuracy': user.Levenshtein_Distance_Accuracy,
+#         'Manhattan Accuracy': user.Manhattan_Accuracy,
+#         'Needleman Accuracy': user.Needleman_Accuracy,
+#         'N-Gram Accuracy': user.N_Gram_Accuracy,
+#         'Smith Waterman Accuracy': user.Smith_Waterman_Accuracy,
+#     }
+#     users_data.append(user_data)
+
+# template = """
+# <!DOCTYPE html>
+# <html>
+# <head>
+#     <title>Data Display</title>
+#     <style>
+#         table {
+#             width: 100%;
+#             border-collapse: collapse;
+#         }
+#         th, td {
+#             border: 1px solid black;
+#             padding: 15px;
+#             text-align: left;
+#         }
+#         th {
+#             background-color: #4CAF50;
+#             color: white;
+#         }
+#     </style>
+# </head>
+# <body>
+#     <h1>Users</h1>
+#     <table>
+#         <tr>
+#             <td>Original</td>
+#             <td>Input</td>
+#             <td>Jaccard Corrected</td>
+#             <td>JaroDistance Corrected</td>
+#             <td>Dice Coefficien Corrected</td>
+#             <td>Cosine Corrected</td>
+#             <td>Damerau-Levenshtein Corrected</td>
+#             <td>Euclidien Distance Corrected</td>
+#             <td>hamming Distance Corrected</td>
+#             <td>Jaro-Winkler Corrected</td>
+#             <td>Longest Common Corrected</td>
+#             <td>Levenshtein Distance Corrected</td>
+#             <td>Manhattan Corrected</td>
+#             <td>Needleman Corrected</td>
+#             <td>N-Gram Corrected</td>
+#             <td>Smith Waterman Corrected</td>
+#             <td>Jaccard Time</td>
+#             <td>JaroDistance Time</td>
+#             <td>Dice Coefficien Time</td>
+#             <td>Cosine Time</td>
+#             <td>Damerau-Levenshtein Time</td>
+#             <td>Euclidien Distance Time</td>
+#             <td>hamming Distance Time</td>
+#             <td>Jaro-Winkler Time</td>
+#             <td>Longest Common Time</td>
+#             <td>Levenshtein Distance Time</td>
+#             <td>Manhattan Time</td>
+#             <td>Needleman Time</td>
+#             <td>N-Gram Time</td>
+#             <td>Smith Waterman Time</td>
+#             <td>Jaccard Accuracy</td>
+#             <td>JaroDistance Accuracy</td>
+#             <td>Dice Coefficien Accuracy</td>
+#             <td>Cosine Accuracy</td>
+#             <td>Damerau-Levenshtein Accuracy</td>
+#             <td>Euclidien Distance Accuracy</td>
+#             <td>hamming Distance Accuracy</td>
+#             <td>Jaro-Winkler Accuracy</td>
+#             <td>Longest Common Accuracy</td>
+#             <td>Levenshtein Distance Accuracy</td>
+#             <td>Manhattan Accuracy</td>
+#             <td>Needleman Accuracy</td>
+#             <td>N-Gram Accuracy</td>
+#             <td>Smith Waterman Accuracy</td>
+#         </tr>
+#         {% for user in users %}
+#         <tr>
+#             <td>{{ user.originalData }}</td>
+#             <td>{{ user.input_data }}</td>
+#             <td>{{ user.Jaccard_Corrected_data }}</td>
+#             <td>{{ user.JaroDistance_Corrected_data }}</td>
+#             <td>{{ user.Dice_Coefficien_Corrected }}</td>
+#             <td>{{ user.Cosine_Corrected_data }}</td>
+#             <td>{{ user.Damerau_Levenshtein_Corrected }}</td>
+#             <td>{{ user.Euclidien_Distance_Corrected }}</td>
+#             <td>{{ user.hamming_Distance_Corrected }}</td>
+#             <td>{{ user.Jaro_Winkler_Corrected }}</td>
+#             <td>{{ user.Longest_Common_Corrected }}</td>
+#             <td>{{ user.Levenshtein_Distance_Corrected }}</td>
+#             <td>{{ user.Manhattan_Corrected }}</td>
+#             <td>{{ user.Needleman_Corrected }}</td>
+#             <td>{{ user.N_Gram_Corrected }}</td>
+#             <td>{{ user.Smith_Waterman_Corrected }}</td>
+#             <td>{{ user.Jaccard_Time }}</td>
+#             <td>{{ user.JaroDistance_Time }}</td>
+#             <td>{{ user.Dice_Coefficien_Time }}</td>
+#             <td>{{ user.Cosine_Time }}</td>
+#             <td>{{ user.Damerau_Levenshtein_Time }}</td>
+#             <td>{{ user.Euclidien_Distance_Time }}</td>
+#             <td>{{ user.hamming_Distance_Time }}</td>
+#             <td>{{ user.Jaro_Winkler_Time }}</td>
+#             <td>{{ user.Longest_Common_Time }}</td>
+#             <td>{{ user.Levenshtein_Distance_Time }}</td>
+#             <td>{{ user.Manhattan_Time }}</td>
+#             <td>{{ user.Needleman_Time }}</td>
+#             <td>{{ user.N_Gram_Time }}</td>
+#             <td>{{ user.Smith_Waterman_Corrected }}</td>
+#             <td>{{ user.Jaccard_Accuracy }}</td>
+#             <td>{{ user.JaroDistance_Accuracy }}</td>
+#             <td>{{ user.Dice_Coefficien_Accuracy }}</td>
+#             <td>{{ user.Cosine_Accuracy }}</td>
+#             <td>{{ user.Damerau_Levenshtein_Accuracy }}</td>
+#             <td>{{ user.Euclidien_Distance_Accuracy }}</td>
+#             <td>{{ user.hamming_Distance_Accuracy }}</td>
+#             <td>{{ user.Jaro_Winkler_Accuracy }}</td>
+#             <td>{{ user.Longest_Common_Accuracy }}</td>
+#             <td>{{ user.Levenshtein_Distance_Accuracy }}</td>
+#             <td>{{ user.Manhattan_Accuracy }}</td>
+#             <td>{{ user.Needleman_Accuracy }}</td>
+#             <td>{{ user.N_Gram_Accuracy }}</td>
+#             <td>{{ user.Smith_Waterman_Accuracy }}</td>
+#         </tr>
+#         {% endfor %}
+#     </table>
+#     </table>
+# </body></html>
+# """
+
+# return render_template_string(template, users=users_data)
+
+
+# def send_data(url, data):
+#     headers = {'Content-Type': 'application/json'}
+#     response = requests.post(url, data=json.dumps(data), headers=headers)
+#     return response
 
 
 def calculate_similarity(algorithm, token1, token2):
@@ -37,16 +340,33 @@ def rata(data):
 
 
 def best_match_and_score(algorithm, token, dictionary):
-    # if not dictionary:
-    #     return None, None  # or some other default value
+    if not dictionary:
+        return None, None  # or some other default value
 
     best_match, best_similarity = max(
         ((word, algorithm(token, word)) for word in dictionary),
         key=lambda x: x[1],
     )
+    # best_match = None
+    # best_similarity = 100  # Initialize with negative
+
+    # # Iterate over each word in the dictionary
+    # for word in dictionary:
+    #     similarity = algorithm(token, word)
+    #     if similarity < best_similarity:
+    #         best_similarity = similarity
+    #         best_match = word
+
     return best_match, best_similarity
 
 # Function to process a DataFrame with input tokens, using the provided algorithms and dictionary
+
+
+def find_algorithm(name):
+    for algorithm_name, algorithm_function in algorithms_to_use:
+        if algorithm_name == name:
+            return algorithm_function
+    return None
 
 
 def process_input_dataframe(df, algorithms, dictionary):
@@ -66,7 +386,7 @@ def process_input_dataframe(df, algorithms, dictionary):
     start_time_ngram = time.time()
     start_time_smith = time.time()
 
-    for input_token, ground_truth in zip(df['Input'], ground_truth_sentences):
+    for input_token, ground_truth in zip(df['Input'], dictionary['Original']):
         print(f"{df['Input']}")
         tokens = tokenize(input_token)
         corrected_tokens_jaccard = []
@@ -294,7 +614,8 @@ def process_input_dataframe(df, algorithms, dictionary):
             'Smith Waterman Accuracy': np.mean(similarity_scores_smith),
         }
         results.append(result_row)
-
+    hasil = json.dumps(results)
+    print(hasil)
     return pd.DataFrame(results)
 
 
@@ -343,11 +664,6 @@ ground_truth_sentences = [
     "close the gate"
 ]
 
-
-# Create a DataFrame from the list of input tokens
-df_input = pd.DataFrame(input_tokens, columns=['Input'])
-df_output = pd.DataFrame(ground_truth_sentences, columns=['Original'])
-
 # Define the algorithms to use
 algorithms_to_use = [
     ('jaccard', jaccard.jakar),
@@ -367,24 +683,34 @@ algorithms_to_use = [
 ]
 
 
-# Define the dictionary of correct words
-# dictionary = ["on", "off", "fan", "tv", "television",
-#               "PC", "lamp", "turn", "unlock", "lock", "gate", "light", "windows", "back door", "oven", "open", "close", "enable", "disable"]
+def exampleCode():
+
+    # Create a DataFrame from the list of input tokens
+    df_input = pd.DataFrame(input_tokens, columns=['Input'])
+    df_output = pd.DataFrame(ground_truth_sentences, columns=['Original'])
+
+    # Define the dictionary of correct words
+    # dictionary = ["on", "off", "fan", "tv", "television",
+    #               "PC", "lamp", "turn", "unlock", "lock", "gate", "light", "windows", "back door", "oven", "open", "close", "enable", "disable"]
+
+    # Process the DataFrame with the provided input tokens
+    df_results = process_input_dataframe(
+        df_input, algorithms_to_use, df_output)
+
+    tabel = tabulate(df_results, headers='keys', tablefmt='grid')
+
+    # Save the processed data to a CSV file
+    output_csv_path_full = 'corrections.csv'
+    df_results.to_csv(output_csv_path_full, index=False, header=True)
+    df_results.to_excel('output.xlsx', index=False)
+    # df_results.to_excel("koreksi.xlsx", index=None, header=True)
+    # The path to the CSV file can be used to download or further process the file
+    print(f"Results saved to {output_csv_path_full}")
 
 
-# Process the DataFrame with the provided input tokens
-df_results = process_input_dataframe(
-    df_input, algorithms_to_use, df_output)
+# run example code
+# exampleCode()
 
-tabel = tabulate(df_results, headers='keys', tablefmt='grid')
-
-# Save the processed data to a CSV file
-output_csv_path_full = 'corrections.csv'
-df_results.to_csv(output_csv_path_full, index=False, header=True)
-df_results.to_excel('output.xlsx', index=False)
-# df_results.to_excel("koreksi.xlsx", index=None, header=True)
-# The path to the CSV file can be used to download or further process the file
-print(f"Results saved to {output_csv_path_full}")
 
 # def calculate_accuracy(best_similarity):
 #     return mean(best_similarity)
