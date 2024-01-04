@@ -14,7 +14,7 @@ def manhattan_distance(vec1, vec2):
     all_words = set(vec1.keys()) | set(vec2.keys())
     print(f"all words : {all_words}")
 
-    # Hitung jarak Euclidean
+    # Hitung jarak manhattan
     return sum(abs(vec1.get(word, 0) - vec2.get(word, 0)) for word in all_words)
 
 
