@@ -43,7 +43,7 @@ def user(algorithm):
     corrected_sentence = ' '.join(corrected_tokens)
 
     total_time = (time.time() - start_time)
-    return jsonify({"output": corrected_sentence, "time": total_time, "score": main.np.mean(similarity_scores)}), 200
+    return jsonify({"output": corrected_sentence, "time": total_time}), 200
 
 
 @app.route('/get_supported_algorithm', methods=['GET'])
