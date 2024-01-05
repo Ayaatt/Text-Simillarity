@@ -3,14 +3,16 @@ from collections import Counter
 
 
 def text_to_vector(text):
-    # Mengonversi teks menjadi vektor frekuensi kata
-    word_counts = Counter(text.split())
-    # print(f"Word Counts : {word_counts}")
-    return word_counts
+    words = text.split()
+    return Counter(words)
 
 
-def cosine_similarity(vec1, vec2):
+def cosine_similarity(vektor1, vektor2):
     # Menghitung dot product antara dua vektor
+
+    vec1 = text_to_vector(vektor1)
+    vec2 = text_to_vector(vektor2)
+
     intersection = set(vec1.keys()) & set(vec2.keys())
     dot_product = sum([vec1[x] * vec2[x] for x in intersection])
     # print(f"intersection : {intersection}")
@@ -29,15 +31,15 @@ def cosine_similarity(vec1, vec2):
         return dot_product / (magnitude1 * magnitude2)
 
 
-# # Contoh penggunaan
-# text1 = "I I enjoy reading about artificial intelligence"
-# text2 = "I enjoy reasing aboyt artifscioal imtekligemce"
+# # # Contoh penggunaan
+# text1 = "intelligence"
+# text2 = "imtekligemce"
 
-# vector1 = text_to_vector(text1)
-# vector2 = text_to_vector(text2)
-# print(f"Vektor 1 : {vector1}")
-# print(f"Vektor 1 : {vector2}")
+# # vector1 = text_to_vector(text1)
+# # vector2 = text_to_vector(text2)
+# # print(f"Vektor 1 : {vector1}")
+# # print(f"Vektor 1 : {vector2}")
 
 
-# similarity = cosine_similarity(vector1, vector2)
+# similarity = cosine_similarity(text1, text2)
 # print("Cosine Similarity:", similarity)

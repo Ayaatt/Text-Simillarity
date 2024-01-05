@@ -21,21 +21,50 @@ def user(algorithm):
     print(tokens)
     corrected_tokens = []
     for token in tokens:
-        # similarity_scores = []
+        similarity_scores = []
         if token in [".", ",", "!", "?", ":", ";", "the"]:
             corrected_tokens.append(token)
             continue
+
+        if algorithm in ["jaro", "damerau-levenshtein", "levenshtein", "jaro-winkler", "manhattan", "euclidien"]:
+            isDistance = True
+        else:
+            isDistance = False
+
         best_match, best_similarity = main.best_match_and_score(
-            fungsi_algoritma            # main.algorithms_to_use[8][1]
-            , token, dictionary)
-        print(token, "  ", best_match)
+            fungsi_algoritma, token, dictionary, is_distance_metric=isDistance)
+        print(
+            f"token : {token} || dict : {dictionary} || best_match : {best_match} || best_similarity : {best_similarity}")
+        # print(token, "  ", best_match)
+        similarity_scores.append(best_similarity)
         corrected_tokens.append(best_match)
         # similarity_scores.append(best_similarity)
 
     corrected_sentence = ' '.join(corrected_tokens)
 
     total_time = (time.time() - start_time)
-    return jsonify({"output": corrected_sentence, "time": total_time}), 200
+    return jsonify({"output": corrected_sentence, "time": total_time, "score": main.np.mean(similarity_scores)}), 200
+
+
+@app.route('/get_supported_algorithm', methods=['GET'])
+def get_supported_algorithm():
+    algorithm_used = [
+        'jaccard',
+        'jaro',
+        'cosine',
+        'damerau-levenshtein',
+        'dice',
+        'euclidien',
+        'hamming',
+        'jaro-winkler',
+        'levenshtein',
+        'longest',
+        'manhattan',
+        'needleman',
+        'smith'
+    ]
+    data = main.json.dumps(algorithm_used)
+    return data
 
 
 if __name__ == '__main__':

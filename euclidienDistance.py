@@ -3,16 +3,17 @@ from collections import Counter
 
 
 def text_to_vector(text):
-    # Mengonversi teks menjadi vektor frekuensi kata
-    word_counts = Counter(text.split())
-    print(f"word counter : {word_counts}")
-    return word_counts
+    words = text.split()
+    return Counter(words)
 
 
-def euclidean_distance(vec1, vec2):
+def euclidean_distance(vektor1, vektor2):
+
+    vec1 = text_to_vector(vektor1)
+    vec2 = text_to_vector(vektor2)
     # Gabungkan semua kata dari kedua vektor
     all_words = set(vec1.keys()) | set(vec2.keys())
-    print(f"all words : {all_words}")
+    # print(f"all words : {all_words}")
 
     # Hitung jarak Euclidean
     return math.sqrt(sum((vec1.get(word, 0) - vec2.get(word, 0)) ** 2 for word in all_words))

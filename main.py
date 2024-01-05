@@ -7,7 +7,7 @@ import jaroDistance
 import jaroWinkler
 import levenshteinD
 import manhattan
-import nGram
+# import nGram
 import smithWaterman
 import hammingDistance
 import longestCommon
@@ -339,23 +339,26 @@ def rata(data):
     return mean(data)
 
 
-def best_match_and_score(algorithm, token, dictionary):
+def best_match_and_score(algorithm, token, dictionary, is_distance_metric=False):
     if not dictionary:
         return None, None  # or some other default value
 
-    best_match, best_similarity = max(
-        ((word, algorithm(token, word)) for word in dictionary),
-        key=lambda x: x[1],
-    )
-    # best_match = None
-    # best_similarity = 100  # Initialize with negative
+    # best_match, best_similarity = max(
+    #     ((word, algorithm(token, word)) for word in dictionary),
+    #     key=lambda x: x[1],
+    # )
+    best_match = None
+    if is_distance_metric:
+        # For distance metrics, initialize with positive infinity
+        best_similarity = float('inf')
+    else:
+        best_similarity = -1  # For similarity metrics, initialize with a low value
 
-    # # Iterate over each word in the dictionary
-    # for word in dictionary:
-    #     similarity = algorithm(token, word)
-    #     if similarity < best_similarity:
-    #         best_similarity = similarity
-    #         best_match = word
+    for word in dictionary:
+        score = algorithm(token, word)
+        if (is_distance_metric and score < best_similarity) or (not is_distance_metric and score > best_similarity):
+            best_similarity = score
+            best_match = word
 
     return best_match, best_similarity
 
@@ -369,7 +372,7 @@ def find_algorithm(name):
     return None
 
 
-def process_input_dataframe(df, algorithms, dictionary):
+def process_input_dataframe(df, dictionary):
     results = []
     start_time_jaccard = time.time()
     start_time_jaro = time.time()
@@ -383,7 +386,6 @@ def process_input_dataframe(df, algorithms, dictionary):
     start_time_leven = time.time()
     start_time_manha = time.time()
     start_time_need = time.time()
-    start_time_ngram = time.time()
     start_time_smith = time.time()
 
     for input_token, ground_truth in zip(df['Input'], dictionary['Original']):
@@ -415,7 +417,6 @@ def process_input_dataframe(df, algorithms, dictionary):
         similarity_scores_leven = []
         similarity_scores_manha = []
         similarity_scores_need = []
-        similarity_scores_ngram = []
         similarity_scores_smith = []
         times_jaccard = []
         times_jaro = []
@@ -429,7 +430,6 @@ def process_input_dataframe(df, algorithms, dictionary):
         times_leven = []
         times_manha = []
         times_need = []
-        times_ngram = []
         times_smith = []
 
         for token in tokens:
@@ -454,98 +454,91 @@ def process_input_dataframe(df, algorithms, dictionary):
                 # print(f"{dictionary['Original']}")
             # Jaccard correction and similarity calculation
             best_match_jaccard, best_similarity_jaccard = best_match_and_score(
-                algorithms[0][1], token, tokenize(ground_truth))
+                find_algorithm("jaccard"), token, tokenize(ground_truth))
             corrected_tokens_jaccard.append(best_match_jaccard)
             similarity_scores_jaccard.append(best_similarity_jaccard)
             times_jaccard.append(time.time() - start_time_jaccard)
 
             # Jaro correction and similarity calculation
             best_match_jaro, best_similarity_jaro = best_match_and_score(
-                algorithms[1][1], token, tokenize(ground_truth))
+                find_algorithm("jaro"), token, tokenize(ground_truth), is_distance_metric=True)
             corrected_tokens_jaro.append(best_match_jaro)
             similarity_scores_jaro.append(best_similarity_jaro)
             times_jaro.append(time.time() - start_time_jaro)
 
             # Dama correction and similarity calculation
             best_match_dama, best_similarity_dama = best_match_and_score(
-                algorithms[1][1], token, tokenize(ground_truth))
+                find_algorithm("damerau-levenshtein"), token, tokenize(ground_truth), is_distance_metric=True)
             corrected_tokens_dama.append(best_match_dama)
             similarity_scores_dama.append(best_similarity_dama)
             times_dama.append(time.time() - start_time_dama)
 
             # Dice correction and similarity calculation
             best_match_dice, best_similarity_dice = best_match_and_score(
-                algorithms[1][1], token, tokenize(ground_truth))
+                find_algorithm("dice"), token, tokenize(ground_truth))
             corrected_tokens_dice.append(best_match_dice)
             similarity_scores_dice.append(best_similarity_dice)
             times_dice.append(time.time() - start_time_dice)
 
             # Cosine correction and similarity calculation
             best_match_cosine, best_similarity_cosine = best_match_and_score(
-                algorithms[1][1], token, tokenize(ground_truth))
+                find_algorithm("cosine"), token, tokenize(ground_truth))
             corrected_tokens_cosine.append(best_match_cosine)
             similarity_scores_cosine.append(best_similarity_cosine)
             times_cosine.append(time.time() - start_time_cosine)
 
             # Euclidien Distance correction and similarity calculation
             best_match_euc, best_similarity_euc = best_match_and_score(
-                algorithms[1][1], token, tokenize(ground_truth))
+                find_algorithm("euclidien"), token, tokenize(ground_truth), is_distance_metric=True)
             corrected_tokens_euc.append(best_match_euc)
             similarity_scores_euc.append(best_similarity_euc)
             times_euc.append(time.time() - start_time_euc)
 
             # hamming correction and similarity calculation
             best_match_hams, best_similarity_hams = best_match_and_score(
-                algorithms[1][1], token, tokenize(ground_truth))
+                find_algorithm("hamming"), token, tokenize(ground_truth), is_distance_metric=True)
             corrected_tokens_hams.append(best_match_hams)
             similarity_scores_hams.append(best_similarity_hams)
             times_hams.append(time.time() - start_time_hams)
 
             # Jaro-Winkler correction and similarity calculation
             best_match_jaroWin, best_similarity_jaroWin = best_match_and_score(
-                algorithms[1][1], token, tokenize(ground_truth))
+                find_algorithm("jaro-winkler"), token, tokenize(ground_truth), is_distance_metric=True)
             corrected_tokens_jaroWin.append(best_match_jaroWin)
             similarity_scores_jaroWin.append(best_similarity_jaroWin)
             times_jaroWin.append(time.time() - start_time_jaroWin)
 
             # Longest correction and similarity calculation
             best_match_longes, best_similarity_longes = best_match_and_score(
-                algorithms[1][1], token, tokenize(ground_truth))
+                find_algorithm("longest"), token, tokenize(ground_truth), is_distance_metric=True)
             corrected_tokens_longes.append(best_match_longes)
             similarity_scores_longes.append(best_similarity_longes)
             times_longes.append(time.time() - start_time_longes)
 
             # Levenshtein correction and similarity calculation
             best_match_leven, best_similarity_leven = best_match_and_score(
-                algorithms[1][1], token, tokenize(ground_truth))
+                find_algorithm("levenshtein"), token, tokenize(ground_truth), is_distance_metric=True)
             corrected_tokens_leven.append(best_match_leven)
             similarity_scores_leven.append(best_similarity_leven)
             times_leven.append(time.time() - start_time_leven)
 
             # Manhattan correction and similarity calculation
             best_match_manha, best_similarity_manha = best_match_and_score(
-                algorithms[1][1], token, tokenize(ground_truth))
+                find_algorithm("manhattan"), token, tokenize(ground_truth), is_distance_metric=True)
             corrected_tokens_manha.append(best_match_manha)
             similarity_scores_manha.append(best_similarity_manha)
             times_manha.append(time.time() - start_time_manha)
 
             # Needleman correction and similarity calculation
             best_match_need, best_similarity_need = best_match_and_score(
-                algorithms[1][1], token, tokenize(ground_truth))
+                find_algorithm("needleman"), token, tokenize(ground_truth))
             corrected_tokens_need.append(best_match_need)
             similarity_scores_need.append(best_similarity_need)
             times_need.append(time.time() - start_time_need)
 
-            # N-Gram correction and similarity calculation
-            best_match_ngram, best_similarity_ngram = best_match_and_score(
-                algorithms[1][1], token, tokenize(ground_truth))
-            corrected_tokens_ngram.append(best_match_ngram)
-            similarity_scores_ngram.append(best_similarity_ngram)
-            times_ngram.append(time.time() - start_time_ngram)
-
             # Smith correction and similarity calculation
             best_match_smith, best_similarity_smith = best_match_and_score(
-                algorithms[1][1], token, tokenize(ground_truth))
+                find_algorithm("smith"), token, tokenize(ground_truth))
             corrected_tokens_smith.append(best_match_smith)
             similarity_scores_smith.append(best_similarity_smith)
             times_smith.append(time.time() - start_time_smith)
@@ -582,7 +575,6 @@ def process_input_dataframe(df, algorithms, dictionary):
             'Levenshtein Distance Corrected': corrected_sentence_leven,
             'Manhattan Corrected': corrected_sentence_manha,
             'Needleman Corrected': corrected_sentence_need,
-            'N-Gram Corrected': corrected_sentence_ngram,
             'Smith Waterman Corrected': corrected_sentence_smith,
             'Jaccard Time': sum(times_jaccard),
             'JaroDistance Time': sum(times_jaro),
@@ -596,7 +588,6 @@ def process_input_dataframe(df, algorithms, dictionary):
             'Levenshtein Distance Time': sum(times_leven),
             'Manhattan Time': sum(times_manha),
             'Needleman Time': sum(times_need),
-            'N-Gram Time': sum(times_ngram),
             'Smith Waterman Time': sum(times_smith),
             'Jaccard Accuracy': np.mean(similarity_scores_jaccard),
             'JaroDistance Accuracy': np.mean(similarity_scores_jaro),
@@ -610,7 +601,6 @@ def process_input_dataframe(df, algorithms, dictionary):
             'Levenshtein Distance Accuracy': np.mean(similarity_scores_leven),
             'Manhattan Accuracy': np.mean(similarity_scores_manha),
             'Needleman Accuracy': np.mean(similarity_scores_need),
-            'N-Gram Accuracy': np.mean(similarity_scores_ngram),
             'Smith Waterman Accuracy': np.mean(similarity_scores_smith),
         }
         results.append(result_row)
@@ -678,7 +668,6 @@ algorithms_to_use = [
     ('longest', longestCommon.longest_common_subsequence),
     ('manhattan', manhattan.manhattan_distance),
     ('needleman', needlemanWunsch.needleman_wunsch),
-    ('ngram', nGram.ngrams),
     ('smith', smithWaterman.smith_waterman)
 ]
 
@@ -695,7 +684,7 @@ def exampleCode():
 
     # Process the DataFrame with the provided input tokens
     df_results = process_input_dataframe(
-        df_input, algorithms_to_use, df_output)
+        df_input, df_output)
 
     tabel = tabulate(df_results, headers='keys', tablefmt='grid')
 

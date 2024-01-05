@@ -1,7 +1,7 @@
 def hamming_distance(str1, str2):
     # Menghitung Hamming Distance antara dua string
     if len(str1) != len(str2):
-        raise ValueError("String harus sama panjangnya")
+        distance = 0
 
     distance = 0
     for ch1, ch2 in zip(str1, str2):
